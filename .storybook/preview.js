@@ -1,23 +1,35 @@
-import { withThemeByDataAttribute } from '@storybook/addon-styling';
-import '../src/tailwind.css';
+import { withThemeFromJSXProvider } from '@storybook/addon-styling';
 
-export const parameters = {
-  actions: { argTypesRegex: '^on[A-Z].*' },
-  controls: {
-    matchers: {
-      color: /(background|color)$/i,
-      date: /Date$/,
-    },
-  },
-};
+const { Global } = require('@emotion/react');
+
+const GlobalStyles = () => <Global />;
 
 export const decorators = [
-  withThemeByDataAttribute({
-    themes: {
-      light: 'light',
-      dark: 'dark',
-    },
-    defaultTheme: 'dark',
-    attributeName: 'data-mode',
+  withThemeFromJSXProvider({
+    GlobalStyles,
   }),
 ];
+
+// import { withThemeByDataAttribute } from '@storybook/addon-styling';
+// import '../src/tailwind.css';
+
+// export const parameters = {
+//   actions: { argTypesRegex: '^on[A-Z].*' },
+//   controls: {
+//     matchers: {
+//       color: /(background|color)$/i,
+//       date: /Date$/,
+//     },
+//   },
+// };
+
+// export const decorators = [
+//   withThemeByDataAttribute({
+//     themes: {
+//       light: 'light',
+//       dark: 'dark',
+//     },
+//     defaultTheme: 'dark',
+//     attributeName: 'data-mode',
+//   }),
+// ];
