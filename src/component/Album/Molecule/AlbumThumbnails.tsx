@@ -1,8 +1,8 @@
 import styled from '@emotion/styled';
 import React, { CSSProperties } from 'react';
-import Album, { AlbumProps } from '../Album';
+import { Atom } from '..';
 
-interface AlbumRankingProps {
+interface AlbumPicturesProps {
   width: CSSProperties['width'];
   height: CSSProperties['height'];
   backgroundColor: CSSProperties['backgroundColor'];
@@ -14,22 +14,24 @@ interface AlbumRankingProps {
   items: {
     id: string;
     thumbnailUrl: string;
-    rank: number;
-    rankChange: number;
     title: string;
     artist: string;
   }[];
-  albumComponent: React.FC<AlbumProps>;
+  albumComponent: React.FC<Atom.BigThumbnailProps>;
+  thumbnailWidth: CSSProperties['width'];
+  thumbnailHeight: CSSProperties['height'];
 }
 
-const AlbumRanking: React.FC<AlbumRankingProps> = ({
-  albumComponent = Album,
+const AlbumPictures: React.FC<AlbumPicturesProps> = ({
+  albumComponent = Atom.BigThumbnail,
   backgroundColor,
   width,
   height,
   items,
   title,
   titleRightComponent,
+  thumbnailHeight,
+  thumbnailWidth,
 }) => {
   return (
     <Container width={width} height={height} backgroundColor={backgroundColor}>
@@ -44,10 +46,10 @@ const AlbumRanking: React.FC<AlbumRankingProps> = ({
             <AlbumComponent
               key={item.id}
               thumbnailUrl={item.thumbnailUrl}
-              rank={item.rank}
-              rankChange={item.rankChange}
               title={item.title}
               artist={item.artist}
+              thumbnailWidth={thumbnailWidth}
+              thumbnailHeight={thumbnailHeight}
             />
           );
         })}
@@ -56,7 +58,7 @@ const AlbumRanking: React.FC<AlbumRankingProps> = ({
   );
 };
 
-const Container = styled.div<Pick<AlbumRankingProps, 'width' | 'height' | 'backgroundColor'>>`
+const Container = styled.div<Pick<AlbumPicturesProps, 'width' | 'height' | 'backgroundColor'>>`
   width: ${(props) => props.width};
   height: ${(props) => props.height};
   background-color: ${(props) => props.backgroundColor};
@@ -76,4 +78,4 @@ const AlbumContainer = styled.div`
   flex-wrap: wrap;
 `;
 
-export default AlbumRanking;
+export default AlbumPictures;

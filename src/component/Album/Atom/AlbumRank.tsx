@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import React, { CSSProperties } from 'react';
 
-export interface AlbumProps {
+export interface AlbumRankProps {
   height?: CSSProperties['height'];
   border?: CSSProperties['border'];
   thumbnailUrl: string;
@@ -13,7 +13,7 @@ export interface AlbumProps {
   className?: string;
 }
 
-const Album: React.FC<AlbumProps> = ({
+const AlbumRank: React.FC<AlbumRankProps> = ({
   className,
   rankContainerWidth = '50px',
   height = '50px',
@@ -39,7 +39,7 @@ const Album: React.FC<AlbumProps> = ({
   );
 };
 
-const Container = styled.div<Pick<AlbumProps, 'height' | 'border'>>`
+const Container = styled.div<Pick<AlbumRankProps, 'height' | 'border'>>`
   height: ${(props) => props.height};
   display: flex;
   padding: 8px;
@@ -69,4 +69,4 @@ const TextContainer = styled.div`
   height: 100%;
 `;
 
-export default Album;
+export default AlbumRank;

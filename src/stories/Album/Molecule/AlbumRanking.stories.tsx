@@ -1,11 +1,13 @@
 import { ComponentStory, Meta } from '@storybook/react';
-import { AlbumRanking } from '../component';
+import { Album } from '../../../component';
 export default {
-  component: AlbumRanking,
+  component: Album.Molecule.AlbumRanking,
   // title: getPathForSrcDesignSystem(base, filename),
 } as Meta;
 
-export const Playground: ComponentStory<typeof AlbumRanking> = ({ ...props }) => <AlbumRanking {...props} data-f="PC-5e77" />;
+export const Playground: ComponentStory<typeof Album.Molecule.AlbumRanking> = ({ ...props }) => (
+  <Album.Molecule.AlbumRanking {...props} data-f="PC-5e77" />
+);
 
 Playground.args = {
   width: '100%',

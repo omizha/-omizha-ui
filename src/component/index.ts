@@ -1,4 +1,3 @@
 export { default as Header } from './Header';
 export { default as Sidebar } from './Sidebar';
-export { default as Album } from './Album';
-export { default as AlbumRanking } from './AlbumRanking';
+export * as Album from './Album';

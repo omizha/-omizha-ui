@@ -1,11 +1,13 @@
 import { ComponentStory, Meta } from '@storybook/react';
-import { Album } from '../component';
+import { Album } from '../../../component';
 export default {
-  component: Album,
+  component: Album.Atom.AlbumRank,
   // title: getPathForSrcDesignSystem(base, filename),
 } as Meta;
 
-export const Playground: ComponentStory<typeof Album> = ({ ...props }) => <Album {...props} data-f="PC-5e77" />;
+export const Playground: ComponentStory<typeof Album.Atom.AlbumRank> = ({ ...props }) => (
+  <Album.Atom.AlbumRank {...props} data-f="PC-5e77" />
+);
 
 Playground.args = {
   thumbnailUrl: 'https://cataas.com/cat/says/hello%20world!',
