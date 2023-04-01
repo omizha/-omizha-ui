@@ -9,12 +9,14 @@ export interface TabsProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'o
 }
 
 const Tabs: React.ForwardRefRenderFunction<HTMLDivElement, TabsProps> = ({ value, extra, onChange, ...divProps }, ref) => {
-  return <div ref={ref} {...divProps} >
-    {extra?.left}
-    <div>Label</div>
-    {extra?.right}
-  </div>
-}
+  return (
+    <div ref={ref} {...divProps}>
+      {extra?.left}
+      <div>Label</div>
+      {extra?.right}
+    </div>
+  );
+};
 
 const ForwardTabs = React.forwardRef(Tabs);
 ForwardTabs.displayName = 'Tabs';
