@@ -1,0 +1,1 @@
+export { getPathForSrcDesignSystem } from './pathUtil';
