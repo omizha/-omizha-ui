@@ -4,58 +4,29 @@ import React, { CSSProperties } from 'react';
 interface SidebarProps {
   width: CSSProperties['width'];
   height: CSSProperties['height'];
-  backgroundColor: CSSProperties['backgroundColor'];
+  backgroundColor?: CSSProperties['backgroundColor'];
+  padding: CSSProperties['padding'];
   items: {
+    /**
+     * 텍스트 (Unique)
+     */
     text: string;
     link?: string;
   }[];
+  className?: string;
 }
 
-const Sidebar: React.FC<SidebarProps> = ({
-  width,
-  height,
-  backgroundColor,
-  items = [
-    {
-      text: '멜론홈',
-    },
-    {
-      text: '멜론차트',
-    },
-    {
-      text: '최신음악',
-    },
-    {
-      text: '장르음악',
-    },
-    {
-      text: '멜론DJ',
-    },
-    {
-      text: '멜론TV',
-    },
-    {
-      text: '어학',
-    },
-    {
-      text: '마이뮤직',
-    },
-    {
-      text: '구매목록',
-    },
-    {
-      text: '보관함',
-    },
-  ],
-}) => {
+const Sidebar: React.FC<SidebarProps> = ({ width, height, backgroundColor, padding, className, items }) => {
   return (
-    <Container width={width} height={height} backgroundColor={backgroundColor}>
+    <Container className={className} width={width} height={height} padding={padding} backgroundColor={backgroundColor}>
       {/* <Icon /> */}
-      <TextContainer>
+      <TextUl>
         {items.map((item) => (
-          <div>{item.text}</div>
+          <TextLi key={item.text} marginBottom={padding}>
+            <a href={item.link}>{item.text}</a>
+          </TextLi>
         ))}
-      </TextContainer>
+      </TextUl>
     </Container>
   );
 };
@@ -63,13 +34,27 @@ const Sidebar: React.FC<SidebarProps> = ({
 const Container = styled.div<{
   width: CSSProperties['width'];
   height: CSSProperties['height'];
-  backgroundColor: CSSProperties['backgroundColor'];
+  backgroundColor?: CSSProperties['backgroundColor'];
+  padding: CSSProperties['padding'];
 }>`
   width: ${(props) => props.width};
   height: ${(props) => props.height};
-  background-color: ${(props) => props.backgroundColor};
+  padding: ${(props) => props.padding};
+  ${({ backgroundColor }) => backgroundColor && `background-color: ${backgroundColor};`}
+
+  box-sizing: border-box;
 `;
 
-const TextContainer = styled.div``;
+const TextUl = styled.ul`
+  list-style: none;
+  padding-left: 0px;
+  margin: 0px;
+`;
+
+const TextLi = styled.li<{
+  marginBottom: CSSProperties['marginBottom'];
+}>`
+  margin-bottom: ${(props) => props.marginBottom};
+`;
 
 export default Sidebar;
