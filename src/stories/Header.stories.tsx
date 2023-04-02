@@ -10,5 +10,5 @@ export const Playground: ComponentStory<typeof Header> = ({ ...props }) => <Head
 Playground.args = {
   width: '100%',
   height: '100px',
-  background: '#EEEEEE',
+  background: '#1E293B',
 };

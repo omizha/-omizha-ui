@@ -48,8 +48,8 @@ export const lightTheme = {
 export const darkTheme = {
   ...lightTheme,
   colors: {
-    background: '#1b1c1d',
-    backgroundInverse: '#333333',
+    background: '#aaaaaa',
+    backgroundInverse: '#aaaaaa',
     positive: '#9fd986',
     negative: '#df987d',
     primary: '#d43369',
