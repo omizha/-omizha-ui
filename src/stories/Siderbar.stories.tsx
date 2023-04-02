@@ -10,7 +10,11 @@ export const Playground: ComponentStory<typeof Sidebar> = ({ ...props }) => <Sid
 Playground.args = {
   width: '150px',
   height: '400px',
-  backgroundColor: '#EEEEEE',
+  backgroundColor: '#1E293B',
+  textDefaultColor: '#9ca3af',
+  textHoverColor: '#d1d5db',
+  textActiveColor: '#d1d5db',
+  selectedText: '최신음악',
   padding: '16px',
   items: [
     {

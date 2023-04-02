@@ -4,6 +4,11 @@ import React, { CSSProperties } from 'react';
 interface SidebarProps {
   width: CSSProperties['width'];
   height: CSSProperties['height'];
+  topComponent?: React.ReactNode;
+  textDefaultColor: CSSProperties['color'];
+  textHoverColor: CSSProperties['color'];
+  textActiveColor: CSSProperties['color'];
+  selectedText: string;
   backgroundColor?: CSSProperties['backgroundColor'];
   padding: CSSProperties['padding'];
   items: {
@@ -16,13 +21,38 @@ interface SidebarProps {
   className?: string;
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ width, height, backgroundColor, padding, className, items }) => {
+const Sidebar: React.FC<SidebarProps> = ({
+  topComponent = <></>,
+  selectedText,
+  textActiveColor,
+  textDefaultColor,
+  textHoverColor,
+  width,
+  height,
+  backgroundColor,
+  padding,
+  className,
+  items,
+}) => {
   return (
-    <Container className={className} width={width} height={height} padding={padding} backgroundColor={backgroundColor}>
-      {/* <Icon /> */}
+    <Container
+      className={className}
+      width={width}
+      height={height}
+      padding={padding}
+      textDefaultColor={textDefaultColor}
+      backgroundColor={backgroundColor}
+    >
+      {topComponent}
       <TextUl>
         {items.map((item) => (
-          <TextLi key={item.text} marginBottom={padding}>
+          <TextLi
+            key={item.text}
+            marginBottom={padding}
+            isActive={item.text === selectedText}
+            textActiveColor={textActiveColor}
+            textHoverColor={textHoverColor}
+          >
             <a href={item.link}>{item.text}</a>
           </TextLi>
         ))}
@@ -34,6 +64,7 @@ const Sidebar: React.FC<SidebarProps> = ({ width, height, backgroundColor, paddi
 const Container = styled.div<{
   width: CSSProperties['width'];
   height: CSSProperties['height'];
+  textDefaultColor: CSSProperties['color'];
   backgroundColor?: CSSProperties['backgroundColor'];
   padding: CSSProperties['padding'];
 }>`
@@ -43,6 +74,7 @@ const Container = styled.div<{
   ${({ backgroundColor }) => backgroundColor && `background-color: ${backgroundColor};`}
 
   box-sizing: border-box;
+  color: ${(props) => props.textDefaultColor};
 `;
 
 const TextUl = styled.ul`
@@ -53,8 +85,17 @@ const TextUl = styled.ul`
 
 const TextLi = styled.li<{
   marginBottom: CSSProperties['marginBottom'];
+  textActiveColor: CSSProperties['color'];
+  textHoverColor: CSSProperties['color'];
+  isActive: boolean;
 }>`
   margin-bottom: ${(props) => props.marginBottom};
+
+  &:hover {
+    color: ${(props) => props.textHoverColor};
+  }
+
+  ${(props) => props.isActive && `color: ${props.textActiveColor};`}
 `;
 
 export default Sidebar;
