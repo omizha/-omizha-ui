@@ -1,5 +1,5 @@
 import { ComponentStory, Meta } from '@storybook/react';
-import { Header } from '../component';
+import { Header, Input } from '../component';
 export default {
   component: Header,
   // title: getPathForSrcDesignSystem(base, filename),
@@ -10,5 +10,6 @@ export const Playground: ComponentStory<typeof Header> = ({ ...props }) => <Head
 Playground.args = {
   width: '100%',
   height: '100px',
-  background: '#1E293B',
+  background: '#334155',
+  leftCompoennt: <Input.Search width="300px" height="40px" placeholder="검색어를 입력해주세요" />,
 };

@@ -4,6 +4,8 @@ import { CSSProperties } from 'react';
 export type DefaultProps = Parameters<typeof Default>[0];
 
 export const Default = styled.input<{
+  width?: CSSProperties['width'];
+  height?: CSSProperties['height'];
   border?: CSSProperties['border'];
   backgroundColor?: CSSProperties['backgroundColor'];
   borderWidth?: CSSProperties['borderWidth'];
@@ -13,20 +15,22 @@ export const Default = styled.input<{
   focusBorder?: CSSProperties['border'];
   placeholderColor?: CSSProperties['color'];
 }>`
-  width: 100%;
   padding: 8px 10px;
   box-sizing: border-box;
   outline: none;
   resize: none;
 
+  ${({ width }) => (width ? `width: ${width};` : `width: 100%;`)}
+  ${({ height }) => height && `height: ${height};`}
+
   ${({ textColor }) => textColor && `color: ${textColor};`}
   ${({ textAlign }) => textAlign && `text-align: ${textAlign};`}
-  ${({ backgroundColor }) => backgroundColor && `background-color: ${backgroundColor};`}
+  ${({ backgroundColor }) => (backgroundColor ? `background-color: ${backgroundColor};` : `background-color: #1E293B;`)}
 
-  ${({ borderWidth }) => !borderWidth && `border-width: 0px;`}
+  border-width: 0;
   ${({ border }) => border && `border: ${border};`}
   ${({ borderWidth }) => borderWidth && `border-width: ${borderWidth};`}
-  ${({ borderRadius }) => borderRadius && `border-radius: ${borderRadius};`}
+  ${({ borderRadius }) => (borderRadius ? `border-radius: ${borderRadius};` : `border-radius: 16px;`)}
 
   &::placeholder {
     ${({ placeholderColor }) => placeholderColor && `color: ${placeholderColor};`}

@@ -3,6 +3,7 @@ import { Default, DefaultProps } from '.';
 
 interface SearchProps {
   onSearch?: () => void;
+  className?: string;
 }
 
 const Search: React.FC<SearchProps & DefaultProps> = ({ onSearch, ...props }) => {

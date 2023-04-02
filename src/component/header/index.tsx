@@ -22,6 +22,9 @@ const Container = styled.div<Pick<HeaderProps, 'width' | 'height' | 'background'
   width: ${(props) => props.width};
   height: ${(props) => props.height};
 
+  display: flex;
+  align-items: center;
+
   ${({ background }) => background && `background: ${background};`}
 `;
 
