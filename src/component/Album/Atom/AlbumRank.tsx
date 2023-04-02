@@ -4,6 +4,8 @@ import React, { CSSProperties } from 'react';
 export interface AlbumRankProps {
   height?: CSSProperties['height'];
   border?: CSSProperties['border'];
+  backgroundColor?: CSSProperties['backgroundColor'];
+  textColor?: CSSProperties['color'];
   thumbnailUrl: string;
   rank: number;
   rankChange: number;
@@ -16,6 +18,8 @@ export interface AlbumRankProps {
 const AlbumRank: React.FC<AlbumRankProps> = ({
   className,
   rankContainerWidth = '50px',
+  backgroundColor,
+  textColor,
   height = '50px',
   border,
   artist,
@@ -25,7 +29,7 @@ const AlbumRank: React.FC<AlbumRankProps> = ({
   title,
 }) => {
   return (
-    <Container className={className} height={height} border={border}>
+    <Container className={className} height={height} border={border} textColor={textColor} backgroundColor={backgroundColor}>
       <Thumbnail src={thumbnailUrl} />
       <RankContainer width={rankContainerWidth}>
         <div>{rank}</div>
@@ -39,12 +43,14 @@ const AlbumRank: React.FC<AlbumRankProps> = ({
   );
 };
 
-const Container = styled.div<Pick<AlbumRankProps, 'height' | 'border'>>`
+const Container = styled.div<Pick<AlbumRankProps, 'height' | 'border' | 'textColor' | 'backgroundColor'>>`
   height: ${(props) => props.height};
   display: flex;
   padding: 8px;
 
   ${({ border }) => border && `border: ${border};`}
+  ${({ backgroundColor }) => backgroundColor && `background-color: ${backgroundColor};`}
+  ${({ textColor }) => textColor && `color: ${textColor};`}
 `;
 
 const Thumbnail = styled.img`

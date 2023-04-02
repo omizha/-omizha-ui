@@ -12,10 +12,11 @@ export const Playground: ComponentStory<typeof Album.Atom.AlbumRank> = ({ ...pro
 Playground.args = {
   thumbnailUrl: 'https://cataas.com/cat/says/hello%20world!',
   height: '50px',
-  border: 'solid 1px #e5e5e5',
   rank: 1,
   rankChange: 0,
   rankContainerWidth: '50px',
   title: 'Ditto',
   artist: 'NewJeans',
+  textColor: '#e5e5e5',
+  backgroundColor: '#1E293B',
 };
