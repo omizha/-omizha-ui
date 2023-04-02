@@ -15,4 +15,5 @@ Playground.args = {
   artist: 'NewJeans',
   thumbnailWidth: '200px',
   thumbnailHeight: '200px',
+  textColor: '#e5e5e5',
 };

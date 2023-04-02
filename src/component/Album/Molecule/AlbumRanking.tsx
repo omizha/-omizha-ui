@@ -5,7 +5,9 @@ import { Atom } from '..';
 interface AlbumRankingProps {
   width: CSSProperties['width'];
   height: CSSProperties['height'];
+  itemHeight?: CSSProperties['height'];
   backgroundColor: CSSProperties['backgroundColor'];
+  textColor?: CSSProperties['color'];
   title: {
     text: string;
     link?: string;
@@ -25,16 +27,18 @@ interface AlbumRankingProps {
 const AlbumRanking: React.FC<AlbumRankingProps> = ({
   albumComponent = Atom.AlbumRank,
   backgroundColor,
+  textColor,
   width,
   height,
+  itemHeight,
   items,
   title,
   titleRightComponent,
 }) => {
   return (
-    <Container width={width} height={height} backgroundColor={backgroundColor}>
+    <Container width={width} height={height} backgroundColor={backgroundColor} textColor={textColor}>
       <TitleContainer>
-        <div>{title.text}</div>
+        <h3>{title.text}</h3>
         {titleRightComponent}
       </TitleContainer>
       <AlbumContainer>
@@ -48,6 +52,8 @@ const AlbumRanking: React.FC<AlbumRankingProps> = ({
               rankChange={item.rankChange}
               title={item.title}
               artist={item.artist}
+              textColor={textColor}
+              height={itemHeight}
             />
           );
         })}
@@ -56,24 +62,32 @@ const AlbumRanking: React.FC<AlbumRankingProps> = ({
   );
 };
 
-const Container = styled.div<Pick<AlbumRankingProps, 'width' | 'height' | 'backgroundColor'>>`
+const Container = styled.div<Pick<AlbumRankingProps, 'width' | 'height' | 'backgroundColor' | 'textColor'>>`
   width: ${(props) => props.width};
   height: ${(props) => props.height};
   background-color: ${(props) => props.backgroundColor};
+  ${(props) => props.textColor && `color: ${props.textColor};`}
+
+  display: flex;
+  flex-direction: column;
+
+  box-sizing: border-box;
+  padding: 16px;
 `;
 
 const TitleContainer = styled.div`
-  height: 30px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 `;
 
 const AlbumContainer = styled.div`
   width: 100%;
   height: 100%;
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
+
+  display: grid;
+  grid-template-rows: repeat(4, 1fr);
+  grid-auto-flow: column;
 `;
 
 export default AlbumRanking;

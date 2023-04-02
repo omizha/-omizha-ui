@@ -11,13 +11,12 @@ export const Playground: ComponentStory<typeof Album.Molecule.AlbumThumbnails> =
 
 Playground.args = {
   width: '100%',
-  height: '300px',
-  thumbnailWidth: '200px',
-  thumbnailHeight: '200px',
+  textColor: '#e5e5e5',
   title: {
-    text: 'TOP100',
+    text: '최신음악',
   },
   titleRightComponent: <div>더보기</div>,
+  thumbnailWidth: '100%',
   items: [
     {
       id: '1',

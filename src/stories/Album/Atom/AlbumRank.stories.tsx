@@ -18,5 +18,4 @@ Playground.args = {
   title: 'Ditto',
   artist: 'NewJeans',
   textColor: '#e5e5e5',
-  backgroundColor: '#1E293B',
 };

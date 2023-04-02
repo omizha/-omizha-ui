@@ -35,25 +35,20 @@ const Sidebar: React.FC<SidebarProps> = ({
   items,
 }) => {
   return (
-    <Container
-      className={className}
-      width={width}
-      height={height}
-      padding={padding}
-      textDefaultColor={textDefaultColor}
-      backgroundColor={backgroundColor}
-    >
+    <Container className={className} width={width} height={height} padding={padding} backgroundColor={backgroundColor}>
       {topComponent}
       <TextUl>
         {items.map((item) => (
-          <TextLi
-            key={item.text}
-            marginBottom={padding}
-            isActive={item.text === selectedText}
-            textActiveColor={textActiveColor}
-            textHoverColor={textHoverColor}
-          >
-            <a href={item.link}>{item.text}</a>
+          <TextLi key={item.text} marginBottom={padding}>
+            <TextHref
+              href={item.link}
+              isActive={item.text === selectedText}
+              textDefaultColor={textDefaultColor}
+              textActiveColor={textActiveColor}
+              textHoverColor={textHoverColor}
+            >
+              {item.text}
+            </TextHref>
           </TextLi>
         ))}
       </TextUl>
@@ -64,7 +59,6 @@ const Sidebar: React.FC<SidebarProps> = ({
 const Container = styled.div<{
   width: CSSProperties['width'];
   height: CSSProperties['height'];
-  textDefaultColor: CSSProperties['color'];
   backgroundColor?: CSSProperties['backgroundColor'];
   padding: CSSProperties['padding'];
 }>`
@@ -74,7 +68,6 @@ const Container = styled.div<{
   ${({ backgroundColor }) => backgroundColor && `background-color: ${backgroundColor};`}
 
   box-sizing: border-box;
-  color: ${(props) => props.textDefaultColor};
 `;
 
 const TextUl = styled.ul`
@@ -85,11 +78,18 @@ const TextUl = styled.ul`
 
 const TextLi = styled.li<{
   marginBottom: CSSProperties['marginBottom'];
+}>`
+  margin-bottom: ${(props) => props.marginBottom};
+`;
+
+const TextHref = styled.a<{
+  textDefaultColor: CSSProperties['color'];
   textActiveColor: CSSProperties['color'];
   textHoverColor: CSSProperties['color'];
   isActive: boolean;
 }>`
-  margin-bottom: ${(props) => props.marginBottom};
+  color: ${(props) => props.textDefaultColor};
+  text-decoration: none;
 
   &:hover {
     color: ${(props) => props.textHoverColor};

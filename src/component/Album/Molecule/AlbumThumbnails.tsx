@@ -1,3 +1,6 @@
+/** @jsxImportSource @emotion/react */
+
+import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import React, { CSSProperties } from 'react';
 import { Atom } from '..';
@@ -6,6 +9,7 @@ interface AlbumPicturesProps {
   width: CSSProperties['width'];
   height: CSSProperties['height'];
   backgroundColor: CSSProperties['backgroundColor'];
+  textColor?: CSSProperties['color'];
   title: {
     text: string;
     link?: string;
@@ -18,13 +22,14 @@ interface AlbumPicturesProps {
     artist: string;
   }[];
   albumComponent: React.FC<Atom.BigThumbnailProps>;
-  thumbnailWidth: CSSProperties['width'];
-  thumbnailHeight: CSSProperties['height'];
+  thumbnailWidth?: CSSProperties['width'];
+  thumbnailHeight?: CSSProperties['height'];
 }
 
-const AlbumPictures: React.FC<AlbumPicturesProps> = ({
+const AlbumPictures = ({
   albumComponent = Atom.BigThumbnail,
   backgroundColor,
+  textColor,
   width,
   height,
   items,
@@ -32,11 +37,11 @@ const AlbumPictures: React.FC<AlbumPicturesProps> = ({
   titleRightComponent,
   thumbnailHeight,
   thumbnailWidth,
-}) => {
+}: AlbumPicturesProps) => {
   return (
-    <Container width={width} height={height} backgroundColor={backgroundColor}>
+    <Container width={width} height={height} backgroundColor={backgroundColor} textColor={textColor}>
       <TitleContainer>
-        <div>{title.text}</div>
+        <h3>{title.text}</h3>
         {titleRightComponent}
       </TitleContainer>
       <AlbumContainer>
@@ -50,6 +55,9 @@ const AlbumPictures: React.FC<AlbumPicturesProps> = ({
               artist={item.artist}
               thumbnailWidth={thumbnailWidth}
               thumbnailHeight={thumbnailHeight}
+              css={css({
+                width: thumbnailWidth,
+              })}
             />
           );
         })}
@@ -58,24 +66,24 @@ const AlbumPictures: React.FC<AlbumPicturesProps> = ({
   );
 };
 
-const Container = styled.div<Pick<AlbumPicturesProps, 'width' | 'height' | 'backgroundColor'>>`
+const Container = styled.div<Pick<AlbumPicturesProps, 'width' | 'height' | 'backgroundColor' | 'textColor'>>`
   width: ${(props) => props.width};
   height: ${(props) => props.height};
   background-color: ${(props) => props.backgroundColor};
+  ${({ textColor }) => textColor && `color: ${textColor};`}
 `;
 
 const TitleContainer = styled.div`
-  height: 30px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 `;
 
 const AlbumContainer = styled.div`
-  width: 100%;
-  height: 100%;
   display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: 16px;
 `;
 
 export default AlbumPictures;

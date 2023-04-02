@@ -12,11 +12,13 @@ export const Playground: ComponentStory<typeof Album.Molecule.AlbumRanking> = ({
 Playground.args = {
   width: '100%',
   height: '300px',
-  backgroundColor: '#eeeeee',
+  itemHeight: '50px',
+  // backgroundColor: '#1E293B',
+  textColor: '#e5e5e5',
   title: {
     text: 'TOP100',
   },
-  titleRightComponent: <div>더보기</div>,
+  titleRightComponent: <div>23:00 기준</div>,
   items: [
     {
       id: '1',
